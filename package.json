@@ -1,0 +1,39 @@
+{
+  "name": "agent-management",
+  "version": "1.0.1",
+  "description": "Agent management system",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:ui": "vitest --ui",
+    "lint": "eslint src/ --ext .ts",
+    "format": "prettier --write src/",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm run test:run"
+  },
+  "keywords": [
+    "agents"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist/",
+    "README.md",
+    "SKILL.md"
+  ],
+  "dependencies": {
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "tsx": "^4.7.0"
+  },
+  "overrides": {
+    "semver": "^7.5.2"
+  }
+}

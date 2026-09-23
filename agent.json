@@ -1,0 +1,169 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Agent Package",
+  "description": "Schema for an agent package in the agent management system",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "description",
+    "harnesses",
+    "skills"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the agent",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "version": {
+      "type": "string",
+      "description": "The version of the agent",
+      "pattern": "^([0-9]+\\.){0,3}[0-9]+$"
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the agent",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "author": {
+      "type": "string",
+      "description": "The author of the agent"
+    },
+    "license": {
+      "type": "string",
+      "description": "The license of the agent",
+      "enum": ["MIT", "Apache-2.0", "ISC", "BSD-3-Clause", "BSD-2-Clause", "GPL-3.0", "LGPL-3.0", "AGPL-3.0", "Proprietary"]
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri",
+      "description": "The homepage URL of the agent"
+    },
+    "repository": {
+      "type": "string",
+      "format": "uri",
+      "description": "The repository URL of the agent"
+    },
+    "harnesses": {
+      "type": "array",
+      "description": "The harnesses the agent supports",
+      "items": {
+        "type": "string",
+        "enum": ["opencode", "claude-code", "cursor", "codex"]
+      },
+      "minItems": 1
+    },
+    "skills": {
+      "type": "array",
+      "description": "The skills the agent possesses",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100
+      },
+      "minItems": 1
+    },
+    "main": {
+      "type": "string",
+      "description": "The main entry point of the agent",
+      "pattern": "^\\.[a-zA-Z0-9_-]+\\.(ts|js|tsx|jsx)$"
+    },
+    "bin": {
+      "type": "string",
+      "description": "The binary entry point of the agent",
+      "pattern": "^[a-zA-Z0-9_-]+\\.(ts|js|tsx|jsx)$"
+    },
+    "scripts": {
+      "type": "object",
+      "description": "Script commands",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "description": "Runtime dependencies",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "devDependencies": {
+      "type": "object",
+      "description": "Development dependencies",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "peerDependencies": {
+      "type": "object",
+      "description": "Peer dependencies",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "optionalDependencies": {
+      "type": "object",
+      "description": "Optional dependencies",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "exports": {
+      "type": "object",
+      "description": "Module exports",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "types": {
+      "type": "string",
+      "description": "Path to type definitions",
+      "pattern": "^\\.[a-zA-Z0-9_-]+\\.d\\.ts$"
+    },
+    "files": {
+      "type": "array",
+      "description": "Files to include in the package",
+      "items": {
+        "type": "string"
+      }
+    },
+    "engines": {
+      "type": "object",
+      "description": "Engine requirements",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "os": {
+      "type": "array",
+      "description": "Supported operating systems",
+      "items": {
+        "type": "string",
+        "enum": ["darwin", "linux", "win32"]
+      }
+    },
+    "cpu": {
+      "type": "array",
+      "description": "Supported CPU architectures",
+      "items": {
+        "type": "string",
+        "enum": ["x64", "arm64", "ia32"]
+      }
+    },
+    "private": {
+      "type": "boolean",
+      "description": "Whether the package is private"
+    },
+    "publishConfig": {
+      "type": "object",
+      "description": "Publish configuration",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,49 @@
+{
+  "name": "example-agent",
+  "version": "1.0.0",
+  "description": "A simple example agent for testing the agent management system",
+  "author": "Example Author",
+  "license": "MIT",
+  "homepage": "https://example.com/example-agent",
+  "repository": "https://github.com/example/example-agent",
+  "harnesses": ["opencode", "claude-code", "cursor", "codex"],
+  "skills": ["testing", "example", "demo"],
+  "main": "dist/index.js",
+  "bin": "cli.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.3",
+    "@types/node": "^20.10.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "optionalDependencies": {},
+  "exports": {
+    ".": "./dist/index.js",
+    "./cli": "./cli.js"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md",
+    "agent.json"
+  ],
+  "engines": {
+    "node": ">= 18.0.0"
+  },
+  "os": ["darwin", "linux"],
+  "cpu": ["x64", "arm64"],
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}
