@@ -11,12 +11,12 @@ This project provides a comprehensive agent management system that allows you to
 
 ## Features
 
-### Core CLI Tool (`npx --package=agent-management agents`)
+### Core CLI Tool (`npx --package=@seancanlas/agentmp agentmp`)
 
 The main CLI tool provides two essential commands:
 
-- **`npx --package=agent-management agents add <source>`**: Install an agent from a source
-- **`npx --package=agent-management agents list`**: List all installed agents
+- **`npx --package=@seancanlas/agentmp agentmp add <source>`**: Install an agent from a source
+- **`npx --package=@seancanlas/agentmp agentmp list`**: List all installed agents
 
 ### Agent Package Structure
 
@@ -42,7 +42,7 @@ The current installer writes Markdown agents to the OpenCode harness:
 ### From npm
 
 ```bash
-npm install -g agent-management
+npm install -g @seancanlas/agentmp
 ```
 
 ### Development
@@ -59,13 +59,13 @@ npm install
 Install a Markdown agent from a GitHub blob URL:
 
 ```bash
-npx --package=agent-management agents add https://github.com/owner/repo/blob/main/agents/agent.md
+npx --package=@seancanlas/agentmp agentmp add https://github.com/owner/repo/blob/main/agents/agent.md
 ```
 
 Install with custom metadata:
 
 ```bash
-npx --package=agent-management agents add https://github.com/owner/repo/blob/main/agents/agent.md \
+npx --package=@seancanlas/agentmp agentmp add https://github.com/owner/repo/blob/main/agents/agent.md \
   --name my-agent \
   --version 1.0.0 \
   --harnesses opencode
@@ -74,8 +74,8 @@ npx --package=agent-management agents add https://github.com/owner/repo/blob/mai
 ### List Agents
 
 ```bash
-npx --package=agent-management agents list
-npx --package=agent-management agents list --harnesses opencode
+npx --package=@seancanlas/agentmp agentmp list
+npx --package=@seancanlas/agentmp agentmp list --harnesses opencode
 ```
 
 ## API
@@ -152,11 +152,11 @@ For support, please visit the GitHub repository or submit an issue.
 
 ```bash
 # Install globally
-npm install -g agent-management
+npm install -g @seancanlas/agentmp
 
 # Start using immediately
-npx --package=agent-management agents add https://github.com/owner/repo/blob/main/agents/agent.md
-npx --package=agent-management agents list
+npx --package=@seancanlas/agentmp agentmp add https://github.com/owner/repo/blob/main/agents/agent.md
+npx --package=@seancanlas/agentmp agentmp list
 ```
 
 The system is designed to be intuitive and follows the familiar npx skills pattern, making it easy for developers to get started quickly.

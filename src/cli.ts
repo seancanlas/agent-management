@@ -10,7 +10,7 @@ async function main(): Promise<void> {
     const cli = new CLICommand();
 
     await yargs(hideBin(process.argv))
-      .scriptName('agents')
+      .scriptName('agentmp')
       .usage('$0 <command> [options]')
       .help()
       .version(false)

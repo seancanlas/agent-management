@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: prod
-      url: https://www.npmjs.com/package/agent-management
+      url: https://www.npmjs.com/package/@seancanlas/agentmp
     permissions:
       contents: read
       id-token: write

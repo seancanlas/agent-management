@@ -12,7 +12,7 @@ This skill provides a complete agent management system that mirrors the existing
 
 The agent management skill provides:
 
-1. **Core CLI Tool (`npx --package=agent-management agents`)**: A command-line interface with two commands:
+1. **Core CLI Tool (`npx --package=@seancanlas/agentmp agentmp`)**: A command-line interface with two commands:
    - `add`: Install a Markdown agent from a GitHub blob URL
    - `list`: List installed OpenCode agents
 
@@ -44,17 +44,17 @@ Use this skill when you need to:
 
 ```bash
 # Add an agent from a GitHub blob URL
-npx --package=agent-management agents add https://github.com/owner/repo/blob/main/agents/agent.md
+npx --package=@seancanlas/agentmp agentmp add https://github.com/owner/repo/blob/main/agents/agent.md
 
 # List installed agents
-npx --package=agent-management agents list
+npx --package=@seancanlas/agentmp agentmp list
 ```
 
 ### Advanced Usage
 
 ```bash
 # Install with custom metadata
-npx --package=agent-management agents add https://github.com/owner/repo/blob/main/agents/agent.md \
+npx --package=@seancanlas/agentmp agentmp add https://github.com/owner/repo/blob/main/agents/agent.md \
   --name my-agent \
   --version 1.0.0 \
   --harnesses opencode

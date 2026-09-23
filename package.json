@@ -1,9 +1,10 @@
 {
-  "name": "agent-management",
-  "version": "1.0.6",
+  "name": "@seancanlas/agentmp",
+  "version": "1.0.0",
   "description": "Agent management system",
   "main": "dist/index.js",
   "bin": {
+    "agentmp": "bin/agents.js",
     "agents": "bin/agents.js"
   },
   "type": "module",
