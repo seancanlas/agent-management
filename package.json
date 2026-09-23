@@ -1,6 +1,6 @@
 {
   "name": "agent-management",
-  "version": "1.0.04",
+  "version": "1.0.4",
   "description": "Agent management system",
   "main": "dist/index.js",
   "type": "module",
