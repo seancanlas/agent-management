@@ -169,3 +169,4 @@ npx agents list
 ```
 
 The system is designed to be intuitive and follows the familiar npx skills pattern, making it easy for developers to get started quickly.
+Agents moved and symlinked

@@ -20,7 +20,6 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["node", "vite/client"],
     "paths": {
       "@core/*": ["./src/core/*"],
       "@commands/*": ["./src/commands/*"],
