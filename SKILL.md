@@ -1,6 +1,6 @@
 ---
 name: agent-management
-description: "Agent management system for OpenCode, Claude Code, Cursor, and Codex. Mirrors npx skills architecture with commands: add, list, remove, find. Supports remote installation from URLs and integrates with multiple IDE/agent harnesses."
+description: "Agent management system for installing Markdown agents from GitHub blob URLs into the OpenCode harness."
 license: MIT
 ---
 
@@ -12,11 +12,9 @@ This skill provides a complete agent management system that mirrors the existing
 
 The agent management skill provides:
 
-1. **Core CLI Tool (`npx agents`)**: A comprehensive command-line interface with four essential commands:
-   - `add`: Install agents from various sources (GitHub, URLs, local paths)
-   - `list`: List all installed agents
-   - `remove`: Remove agents from harnesses
-   - `find`: Search for agents by name, version, or in specific harnesses
+1. **Core CLI Tool (`npx --package=agent-management agents`)**: A command-line interface with two commands:
+   - `add`: Install a Markdown agent from a GitHub blob URL
+   - `list`: List installed OpenCode agents
 
 2. **Agent Package Structure**: Standardized package structure with:
    - `agent.json`: Agent metadata and configuration
@@ -25,11 +23,8 @@ The agent management skill provides:
    - `index.ts`: Main implementation
    - `SKILL.md`: Skills compatibility
 
-3. **Harness Integration**: Seamless integration with four major platforms:
+3. **Harness Integration**: The current installer writes to the OpenCode harness:
    - **OpenCode**: `~/.config/opencode/agents/`
-   - **Claude Code**: `~/.config/claude-code/agents/`
-   - **Cursor**: `~/.cursor/agents/`
-   - **Codex**: `~/.codex/agents/`
 
 4. **Migration Support**: Ability to migrate existing OpenCode agents to the new harness structure.
 
@@ -48,32 +43,21 @@ Use this skill when you need to:
 ### Basic Usage
 
 ```bash
-# Add an agent from GitHub
-npx agents add github:owner/agent-name
+# Add an agent from a GitHub blob URL
+npx --package=agent-management agents add https://github.com/owner/repo/blob/main/agents/agent.md
 
 # List installed agents
-npx agents list
-
-# Find agents by name
-npx agents find my-agent
-
-# Remove an agent
-npx agents remove my-agent
+npx --package=agent-management agents list
 ```
 
 ### Advanced Usage
 
 ```bash
-# Install with specific options
-npx agents add github:owner/agent-name \
+# Install with custom metadata
+npx --package=agent-management agents add https://github.com/owner/repo/blob/main/agents/agent.md \
   --name my-agent \
   --version 1.0.0 \
-  --harnesses opencode,claude-code \
-  --symlink \
-  --global
-
-# Search in specific harnesses
-npx agents find --harnesses cursor,opencode
+  --harnesses opencode
 ```
 
 ## Technical Architecture
@@ -94,7 +78,7 @@ All services use dependency injection for testability and maintainability:
 ```typescript
 const app = new Application();
 const agentManager = app.getAgentManager();
-const result = await agentManager.installAgent('github:owner/agent-name');
+const result = await agentManager.installAgent('https://github.com/owner/repo/blob/main/agents/agent.md');
 ```
 
 ## API Reference
@@ -102,9 +86,7 @@ const result = await agentManager.installAgent('github:owner/agent-name');
 ### AgentManager Methods
 
 - `installAgent(source: string, options?: InstallOptions): Promise<InstallResult>`
-- `listAgents(harnesses?: string[]): Promise<AgentPackage[]>`
-- `removeAgent(name: string, version?: string, harnesses?: string[]): Promise<RemoveResult>`
-- `findAgent(name?: string, version?: string, harnesses?: string[]): Promise<AgentPackage[]>`
+- `listAgents(): Promise<AgentPackage[]>`
 
 ### InstallOptions Interface
 
@@ -113,11 +95,6 @@ interface InstallOptions {
   name?: string;
   version?: string;
   harnesses?: string[];
-  symlink?: boolean;
-  global?: boolean;
-  force?: boolean;
-  skipValidation?: boolean;
-  outputDir?: string;
 }
 ```
 

@@ -1,9 +1,9 @@
 "use strict";
-import { Application } from '../core/application';
+import { Application } from '../core/application.js';
 export class CLICommand {
     app;
-    constructor() {
-        this.app = new Application();
+    constructor(app = new Application()) {
+        this.app = app;
     }
     async addCommand(args) {
         console.log('Adding agent...');
@@ -13,14 +13,12 @@ export class CLICommand {
             harnesses: args.harnesses ? args.harnesses.split(',') : undefined,
         };
         const result = await this.app.getAgentManager().installAgent(args.source, options);
-        if (result.success) {
-            console.log(`✅ Agent ${result.package?.name}@${result.package?.version} installed successfully!`);
-            console.log(`📝 Description: ${result.package?.description}`);
-            console.log(`🏷️  Harnesses: ${result.package?.harnesses.join(', ')}`);
+        if (!result.success) {
+            throw new Error(result.error || 'Unknown installation error');
         }
-        else {
-            console.error(`❌ Failed to install agent: ${result.error}`);
-        }
+        console.log(`Agent ${result.package?.name}@${result.package?.version} installed successfully!`);
+        console.log(`Description: ${result.package?.description}`);
+        console.log(`Harnesses: ${result.package?.harnesses.join(', ')}`);
     }
     async listCommand(args) {
         console.log('Listing agents...');

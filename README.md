@@ -6,17 +6,17 @@ An agent management system for OpenCode, Claude Code, Cursor, and Codex that mir
 
 This project provides a comprehensive agent management system that allows you to:
 
-- **Add** agents from various sources (GitHub, URLs, local paths)
+- **Add** agents from GitHub Markdown blob URLs
 - **List** installed agents
 
 ## Features
 
-### Core CLI Tool (`npx agents`)
+### Core CLI Tool (`npx --package=agent-management agents`)
 
 The main CLI tool provides two essential commands:
 
-- **`npx agents add <source>`**: Install an agent from a source
-- **`npx agents list`**: List all installed agents
+- **`npx --package=agent-management agents add <source>`**: Install an agent from a source
+- **`npx --package=agent-management agents list`**: List all installed agents
 
 ### Agent Package Structure
 
@@ -33,10 +33,9 @@ my-agent/
 
 ### Harness Integration
 
+The current installer writes Markdown agents to the OpenCode harness:
+
 - **OpenCode**: `~/.config/opencode/agents/`
-- **Claude Code**: `~/.config/claude-code/agents/`
-- **Cursor**: `~/.cursor/agents/`
-- **Codex**: `~/.codex/agents/`
 
 ## Installation
 
@@ -57,34 +56,26 @@ npm install
 
 ### Add an Agent
 
-Install an agent from a GitHub repository:
+Install a Markdown agent from a GitHub blob URL:
 
 ```bash
-npx agents add github:owner/agent-name
+npx --package=agent-management agents add https://github.com/owner/repo/blob/main/agents/agent.md
 ```
 
-Install from a URL:
+Install with custom metadata:
 
 ```bash
-npx agents add https://github.com/owner/agent-name/archive/refs/heads/main.tar.gz
-```
-
-Install with custom options:
-
-```bash
-npx agents add github:owner/agent-name \
+npx --package=agent-management agents add https://github.com/owner/repo/blob/main/agents/agent.md \
   --name my-agent \
   --version 1.0.0 \
-  --harnesses opencode,claude-code \
-  --symlink \
-  --global
+  --harnesses opencode
 ```
 
 ### List Agents
 
 ```bash
-npx agents list
-npx agents list --harnesses opencode,claude-code
+npx --package=agent-management agents list
+npx --package=agent-management agents list --harnesses opencode
 ```
 
 ## API
@@ -98,10 +89,10 @@ const app = new Application();
 const agentManager = app.getAgentManager();
 
 // Install an agent
-const result = await agentManager.installAgent('github:owner/agent-name');
+const result = await agentManager.installAgent('https://github.com/owner/repo/blob/main/agents/agent.md');
 
 // List agents
-const agents = await agentManager.listAgents(['opencode', 'claude-code']);
+const agents = await agentManager.listAgents();
 ```
 
 ## Development
@@ -164,8 +155,8 @@ For support, please visit the GitHub repository or submit an issue.
 npm install -g agent-management
 
 # Start using immediately
-npx agents add github:owner/agent-name
-npx agents list
+npx --package=agent-management agents add https://github.com/owner/repo/blob/main/agents/agent.md
+npx --package=agent-management agents list
 ```
 
 The system is designed to be intuitive and follows the familiar npx skills pattern, making it easy for developers to get started quickly.

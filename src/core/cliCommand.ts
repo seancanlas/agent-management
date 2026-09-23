@@ -1,15 +1,26 @@
 "use strict";
 
-import { Application } from '../core/application';
+import { Application } from '../core/application.js';
+
+export interface AddCommandArgs {
+  source: string;
+  name?: string | undefined;
+  version?: string | undefined;
+  harnesses?: string | undefined;
+}
+
+export interface ListCommandArgs {
+  harnesses?: string | undefined;
+}
 
 export class CLICommand {
   private app: Application;
 
-  constructor() {
-    this.app = new Application();
+  constructor(app: Application = new Application()) {
+    this.app = app;
   }
 
-  async addCommand(args: any): Promise<void> {
+  async addCommand(args: AddCommandArgs): Promise<void> {
     console.log('Adding agent...');
     
     const options = {
@@ -20,16 +31,16 @@ export class CLICommand {
 
     const result = await this.app.getAgentManager().installAgent(args.source, options);
     
-    if (result.success) {
-      console.log(`✅ Agent ${result.package?.name}@${result.package?.version} installed successfully!`);
-      console.log(`📝 Description: ${result.package?.description}`);
-      console.log(`🏷️  Harnesses: ${result.package?.harnesses.join(', ')}`);
-    } else {
-      console.error(`❌ Failed to install agent: ${result.error}`);
+    if (!result.success) {
+      throw new Error(result.error || 'Unknown installation error');
     }
+
+    console.log(`Agent ${result.package?.name}@${result.package?.version} installed successfully!`);
+    console.log(`Description: ${result.package?.description}`);
+    console.log(`Harnesses: ${result.package?.harnesses.join(', ')}`);
   }
 
-  async listCommand(args: any): Promise<void> {
+  async listCommand(args: ListCommandArgs): Promise<void> {
     console.log('Listing agents...');
     
     // Handle harnesses option

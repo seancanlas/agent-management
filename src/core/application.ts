@@ -1,12 +1,12 @@
 "use strict";
 
-import { AgentManager } from './agentManager';
+import { AgentManager } from './agentManager.js';
 
 export class Application {
   private agentManager: AgentManager;
 
-  constructor() {
-    this.agentManager = new AgentManager();
+  constructor(agentManager: AgentManager = new AgentManager()) {
+    this.agentManager = agentManager;
   }
 
   getAgentManager(): AgentManager {

@@ -1,7 +1,7 @@
-import { AgentManager } from './agentManager';
+import { AgentManager } from './agentManager.js';
 export declare class Application {
     private agentManager;
-    constructor();
+    constructor(agentManager?: AgentManager);
     getAgentManager(): AgentManager;
 }
 //# sourceMappingURL=application.d.ts.map

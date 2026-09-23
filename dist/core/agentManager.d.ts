@@ -5,9 +5,9 @@ export interface AgentPackage {
     harnesses: string[];
 }
 export interface InstallOptions {
-    name?: string;
-    version?: string;
-    harnesses?: string[];
+    name?: string | undefined;
+    version?: string | undefined;
+    harnesses?: string[] | undefined;
 }
 export interface InstallResult {
     success: boolean;
@@ -15,8 +15,20 @@ export interface InstallResult {
     error?: string;
     messages: string[];
 }
+export type FetchText = (url: string) => Promise<string>;
+export type WriteText = (path: string, content: string) => Promise<void>;
+export interface AgentManagerDependencies {
+    fetchText?: FetchText;
+    writeText?: WriteText;
+    homeDir?: string;
+}
+export declare function githubBlobToRawUrl(source: string): {
+    rawUrl: string;
+    fileName: string;
+};
 export declare class AgentManager {
-    constructor();
+    private readonly dependencies;
+    constructor(dependencies?: AgentManagerDependencies);
     installAgent(source: string, options?: InstallOptions): Promise<InstallResult>;
     listAgents(): Promise<AgentPackage[]>;
 }

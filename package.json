@@ -1,12 +1,16 @@
 {
   "name": "agent-management",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Agent management system",
   "main": "dist/index.js",
+  "bin": {
+    "agents": "bin/agents.js"
+  },
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "dev": "tsx src/index.ts",
+    "prepack": "npm run build",
+    "dev": "tsx src/cli.ts",
     "test": "vitest",
     "test:run": "vitest run",
     "lint": "eslint src/ --ext .ts",
@@ -30,6 +34,7 @@
     "url": "git+https://github.com/seancanlas/agent-management.git"
   },
   "files": [
+    "bin/",
     "dist/",
     "README.md",
     "SKILL.md"
